@@ -125,7 +125,8 @@ def check_folder(settings):
     return settings
 
 
-def get_desc_table(df, settings, target_event_list=list(['lost', 'passed']), max_steps=None, plot=True, plot_name=None):
+def get_desc_table(df, export_folder, target_event_list=list(['payment_confirmed']), max_steps=None, plot=True,
+                   plot_name=None):
     """
     Builds distribution of events over steps
     :param df: Clickstream
@@ -160,9 +161,7 @@ def get_desc_table(df, settings, target_event_list=list(['lost', 'passed']), max
 
     if plot:
         # create folder for experiment if doesn't exists
-        settings = check_folder(settings)
-        export_folder = settings['export_folder']
-        sns.mpl.pyplot.figure(figsize=(20, 10))
+        sns.mpl.pyplot.figure(figsize=(80, 40))
         heatmap = sns.heatmap(piv, annot=True, cmap="YlGnBu")
         if plot_name:
             filename = os.path.join(export_folder, 'desc_table_{}.png'.format(plot_name))
